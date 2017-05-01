@@ -1,0 +1,78 @@
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "3Vd-hv-LPg"; */
+"3Vd-hv-LPg.text" = "Label";
+
+/* Class = "UINavigationItem"; title = "Emergência"; ObjectID = "49c-Eh-2EM"; */
+"49c-Eh-2EM.title" = "Emergência";
+
+/* Class = "UIButton"; normalTitle = "Login"; ObjectID = "5cF-Uc-TDu"; */
+"5cF-Uc-TDu.normalTitle" = "Login";
+
+/* Class = "UILabel"; text = "IP"; ObjectID = "AKW-Vy-DMP"; */
+"AKW-Vy-DMP.text" = "IP";
+
+/* Class = "UINavigationItem"; title = "Status"; ObjectID = "Dbt-71-xwX"; */
+"Dbt-71-xwX.title" = "Status";
+
+/* Class = "UITextField"; placeholder = "Email"; ObjectID = "E0X-Jf-Ic3"; */
+"E0X-Jf-Ic3.placeholder" = "Email";
+
+/* Class = "UITextField"; placeholder = "Senha"; ObjectID = "Fak-ud-TRe"; */
+"Fak-ud-TRe.placeholder" = "Senha";
+
+/* Class = "UINavigationItem"; title = "Opções"; ObjectID = "GiF-nf-lUi"; */
+"GiF-nf-lUi.title" = "Opções";
+
+/* Class = "UILabel"; text = "Quarto"; ObjectID = "I1B-3F-gAc"; */
+"I1B-3F-gAc.text" = "Quarto";
+
+/* Class = "UILabel"; text = "192.168.1.1"; ObjectID = "KpF-KW-wGo"; */
+"KpF-KW-wGo.text" = "192.168.1.1";
+
+/* Class = "UILabel"; text = "20%"; ObjectID = "NH7-wh-25b"; */
+"NH7-wh-25b.text" = "20%";
+
+/* Class = "UINavigationItem"; title = "Câmera"; ObjectID = "ObE-td-2gl"; */
+"ObE-td-2gl.title" = "Câmera";
+
+/* Class = "UILabel"; text = "Banheiro"; ObjectID = "RIX-pq-Tfr"; */
+"RIX-pq-Tfr.text" = "Banheiro";
+
+/* Class = "UILabel"; text = "Cozinha"; ObjectID = "RSj-MK-whi"; */
+"RSj-MK-whi.text" = "Cozinha";
+
+/* Class = "UILabel"; text = "Sala"; ObjectID = "SdH-Id-Fx6"; */
+"SdH-Id-Fx6.text" = "Sala";
+
+/* Class = "UILabel"; text = "Nome"; ObjectID = "WFs-WQ-rqC"; */
+"WFs-WQ-rqC.text" = "Nome";
+
+/* Class = "UILabel"; text = "Umidade"; ObjectID = "d68-7Z-tv9"; */
+"d68-7Z-tv9.text" = "Umidade";
+
+/* Class = "UINavigationItem"; title = "Portas"; ObjectID = "dZs-1K-DYG"; */
+"dZs-1K-DYG.title" = "Portas";
+
+/* Class = "UILabel"; text = "Fogo"; ObjectID = "dep-Hb-2UF"; */
+"dep-Hb-2UF.text" = "Fogo";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "emt-u4-RXu"; */
+"emt-u4-RXu.text" = "Label";
+
+/* Class = "UILabel"; text = "Presença"; ObjectID = "qJe-mV-loM"; */
+"qJe-mV-loM.text" = "Presença";
+
+/* Class = "UILabel"; text = "Gás"; ObjectID = "rMV-g8-UTp"; */
+"rMV-g8-UTp.text" = "Gás";
+
+/* Class = "UILabel"; text = "25ºC"; ObjectID = "tI9-Nf-sHX"; */
+"tI9-Nf-sHX.text" = "25ºC";
+
+/* Class = "UILabel"; text = "Temperatura"; ObjectID = "yNk-5D-Ns6"; */
+"yNk-5D-Ns6.text" = "Temperatura";
+
+/* Class = "UILabel"; text = "Alarme"; ObjectID = "ylj-9o-AOz"; */
+"ylj-9o-AOz.text" = "Alarme";
+
+/* Class = "UINavigationItem"; title = "Alarme"; ObjectID = "zI4-hT-1B4"; */
+"zI4-hT-1B4.title" = "Alarme";
