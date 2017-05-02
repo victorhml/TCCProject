@@ -219,7 +219,6 @@ class WagesSens():
 
 
                 m1.pack(side=TOP)
-
                 m2 = Frame(master)
                 self.buttonBack = Button(m2, text="Voltar", command=self.finish, width=75).pack(side='bottom')
                 m2.pack(side=BOTTOM)
@@ -248,7 +247,7 @@ class WagesSens():
                                 gasTxt.set('ON')
                                 db.child('gas').set({'state' : 'ON'})
     
-                        flame_level = 1024-ReadChannel(flame_channel)
+                        flame_level = 1023-ReadChannel(flame_channel)
                         fogNvl.set(flame_level)
                         db.child('fogo').set({'nivel' : flame_level})
                         
