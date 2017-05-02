@@ -202,7 +202,7 @@ while(True):
         db.child("gas").set({"nivel": "{}".format(gas_level), "state":"ON"})
         time.sleep(.1)
     
-    flame_level = 1024-ReadChannel(flame_channel)
+    flame_level = 1023-ReadChannel(flame_channel)
 #    flame_nvl = FlameNvl(flame_level,2)
 #    db.child("fogo").set({"nivel":"{}".format(flame_level)})
     if flame_level < 300:
