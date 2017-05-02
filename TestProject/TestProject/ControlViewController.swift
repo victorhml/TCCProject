@@ -52,14 +52,14 @@ class ControlViewController: UIViewController, UICollectionViewDataSource, UICol
                     alert2.showWarning("ERRO ⚠️", subTitle: "Senha antiga incorreta\nDigite novamente")
                 }
                 
-                if newS.text != newSR.text {
+                else if newS.text != newSR.text {
                     //                print("valores diferentes")
                     let alert2 = SCLAlertView()
                     alert2.addButton("OK", action: {
                     })
                     alert2.showWarning("ERRO ⚠️", subTitle: "Senhas novas diferentes\nDigite novamente")
                 }
-                if oldS.text!.characters.count == 0 || newS.text!.characters.count == 0 || newSR.text!.characters.count == 0 {
+                else if oldS.text!.characters.count == 0 || newS.text!.characters.count == 0 || newSR.text!.characters.count == 0 {
                     //                print("insira algo")
                     loginSt.se = self.s
                     let alert2 = SCLAlertView()
@@ -67,7 +67,7 @@ class ControlViewController: UIViewController, UICollectionViewDataSource, UICol
                     })
                     alert2.showWarning("ERRO ⚠️", subTitle: "Campo vazio\nDigite novamente")
                 }
-                if (newS.text!.characters.count < 6 && newS.text!.characters.count > 0) || (newSR.text!.characters.count < 6 && newSR.text!.characters.count > 0) {
+                else if (newS.text!.characters.count < 6 && newS.text!.characters.count > 0) || (newSR.text!.characters.count < 6 && newSR.text!.characters.count > 0) {
                     //                print("6 digitos")
                     let alert2 = SCLAlertView()
                     alert2.addButton("OK", action: {
