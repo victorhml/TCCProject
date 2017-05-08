@@ -22,9 +22,12 @@ class ControlViewController: UIViewController, UICollectionViewDataSource, UICol
     var oldP = String()
     var newP = String()
     var newPR = String()
-    
-    var e = loginSt.em
-    var s = loginSt.se
+//    
+//    var e = loginSt.em
+//    var s = loginSt.se
+    var f = 0
+    var g = 0
+    var p = 0
     
     let managedObjectContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
 
@@ -44,11 +47,12 @@ class ControlViewController: UIViewController, UICollectionViewDataSource, UICol
             
             
             alert.addButton("Trocar Senha") {
-                if oldS.text != self.s && oldS.text!.characters.count != 0 {
+                if oldS.text != loginSt.se && oldS.text!.characters.count != 0 {
                     //                print("senha inicial errada")
                     let alert2 = SCLAlertView()
                     alert2.addButton("OK", action: {
                     })
+                    print(loginSt.se)
                     alert2.showWarning("ERRO ⚠️", subTitle: "Senha antiga incorreta\nDigite novamente")
                 }
                 
@@ -61,7 +65,7 @@ class ControlViewController: UIViewController, UICollectionViewDataSource, UICol
                 }
                 else if oldS.text!.characters.count == 0 || newS.text!.characters.count == 0 || newSR.text!.characters.count == 0 {
                     //                print("insira algo")
-                    loginSt.se = self.s
+//                    loginSt.se = self.s
                     let alert2 = SCLAlertView()
                     alert2.addButton("OK", action: {
                     })
@@ -172,6 +176,12 @@ class ControlViewController: UIViewController, UICollectionViewDataSource, UICol
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         checkIfUserIsLoggedIn()
         navigationItem.leftBarButtonItem?.tintColor = UIColor.white
         navigationItem.rightBarButtonItem?.tintColor = UIColor.white
@@ -179,10 +189,6 @@ class ControlViewController: UIViewController, UICollectionViewDataSource, UICol
         getDataGas()
         getDataPres()
         
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
         //        getData()
         //        print("email: \(loginSt.em)")
         //        print("senha: \(loginSt.se)")
@@ -225,7 +231,9 @@ class ControlViewController: UIViewController, UICollectionViewDataSource, UICol
             let state = dict!["state"] as! String
             if (state == "ON") {
                 //                self.getNotifFlame()
-                self.getAlertFlame()
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {
+                    self.getAlertFlame()
+                })
                 print("FOGO!!")
             }
         })
@@ -237,8 +245,10 @@ class ControlViewController: UIViewController, UICollectionViewDataSource, UICol
             let dict = snapshot.value as? NSDictionary
             let state = dict!["state"] as! String
             if (state == "ON") {
-                //                self.getNotifGas()
-                self.getAlertGas()
+//                                self.getNotifGas()
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {
+                    self.getAlertGas()
+                })
             }
         })
     }
@@ -250,7 +260,10 @@ class ControlViewController: UIViewController, UICollectionViewDataSource, UICol
             let state = dict!["state"] as! String
             if (state == "ON") {
                 //                self.getNotifPres()
-                self.getAlertPres()
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {
+                    self.getAlertPres()
+                })
+
             }
         })
     }
@@ -277,11 +290,15 @@ class ControlViewController: UIViewController, UICollectionViewDataSource, UICol
     }
     
     func getAlertFlame() {
+        self.f = 1
         let alert = SCLAlertView()
         alert.addButton("Acionar Alarme", target: self, selector: #selector(ControlViewController.acionaAl))
         alert.addButton("Ligar Câmera", target: self, selector: #selector(ControlViewController.abreCam))
         alert.addButton("Chamar bombeiros", target: self, selector: #selector(ControlViewController.bomb))
-        alert.addButton("OK", target: self, selector: #selector(ControlViewController.hide))
+//        alert.addButton("OK", target: self, selector: #selector(ControlViewController.hide))
+        alert.addButton("OK") { 
+            self.f = 0
+        }
         alert.showWarning("Foco de incêndio", subTitle: "O que deseja fazer?")
     }
     
@@ -307,11 +324,15 @@ class ControlViewController: UIViewController, UICollectionViewDataSource, UICol
     }
     
     func getAlertGas() {
+        self.g = 1
         let alert = SCLAlertView()
         alert.addButton("Acionar Alarme", target: self, selector: #selector(ControlViewController.acionaAl))
         alert.addButton("Ligar Câmera", target: self, selector: #selector(ControlViewController.abreCam))
         alert.addButton("Chamar bombeiros", target: self, selector: #selector(ControlViewController.bomb))
-        alert.addButton("OK", target: self, selector: #selector(ControlViewController.hide))
+//        alert.addButton("OK", target: self, selector: #selector(ControlViewController.hide))
+        alert.addButton("OK") {
+            self.g = 0
+        }
         alert.showWarning("Vazamento de Gas", subTitle: "O que deseja fazer?")
     }
     
@@ -337,11 +358,15 @@ class ControlViewController: UIViewController, UICollectionViewDataSource, UICol
     }
     
     func getAlertPres() {
+        self.p = 1
         let alert = SCLAlertView()
         alert.addButton("Acionar Alarme", target: self, selector: #selector(ControlViewController.acionaAl))
         alert.addButton("Ligar Câmera", target: self, selector: #selector(ControlViewController.abreCam))
         alert.addButton("Chamar Polícia", target: self, selector: #selector(ControlViewController.pol))
-        alert.addButton("OK", target: self, selector: #selector(ControlViewController.hide))
+//        alert.addButton("OK", target: self, selector: #selector(ControlViewController.hide))
+        alert.addButton("OK") {
+            self.p = 0
+        }
         alert.showWarning("Intruso Detectado", subTitle: "O que deseja fazer?")
     }
     

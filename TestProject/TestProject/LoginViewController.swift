@@ -21,6 +21,44 @@ struct loginSt {
 
 class LoginViewController: UIViewController, MFMailComposeViewControllerDelegate {
     
+    override var shouldAutorotate: Bool {
+//        return false
+        var st = Bool()
+    switch UIDevice.current.userInterfaceIdiom {
+        case .phone:
+        // It's an iPhone
+            st = false
+        case .pad:
+        // It's an iPad
+            st = true
+        case .unspecified:
+            st = false
+            // Uh, oh! What could it be?
+        default:
+            break
+        }
+        return st
+    }
+    
+    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+//        return UIInterfaceOrientationMask.portrait
+        var st = UIInterfaceOrientationMask()
+        switch UIDevice.current.userInterfaceIdiom {
+        case .phone:
+        // It's an iPhone
+            st = UIInterfaceOrientationMask.portrait
+        case .pad:
+        // It's an iPad
+            st = [UIInterfaceOrientationMask.portrait, UIInterfaceOrientationMask.portraitUpsideDown, UIInterfaceOrientationMask.landscapeLeft, UIInterfaceOrientationMask.landscapeRight]
+        case .unspecified:
+            st = UIInterfaceOrientationMask.portrait
+            // Uh, oh! What could it be?
+        default:
+            break
+        }
+        return st
+    }
+    
     let managedObjectContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
     var x = 0
@@ -69,7 +107,7 @@ class LoginViewController: UIViewController, MFMailComposeViewControllerDelegate
         alert.addButton("Enviar") {
             FIRAuth.auth()?.sendPasswordReset(withEmail: recEm.text!, completion: { (error) in
                 if error != nil {
-//                    print("Não foi possível")
+                    //                    print("Não foi possível")
                     let alert2 = SCLAlertView()
                     alert2.addButton("OK", action: {
                     })
@@ -84,7 +122,7 @@ class LoginViewController: UIViewController, MFMailComposeViewControllerDelegate
             })
             
         }
-        alert.addButton("Cancelar") { 
+        alert.addButton("Cancelar") {
         }
         alert.showWarning("Recuperar senha", subTitle: "")
     }
@@ -133,10 +171,12 @@ class LoginViewController: UIViewController, MFMailComposeViewControllerDelegate
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        //        self.authenticateUser()
         
         loadData()
-//        senhaText.text = ""
+        if loginSt.em != "" && loginSt.se != "" {
+            self.authenticateUser()
+        }
+        //        senhaText.text = ""
         _ = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(LoginViewController.changeColor), userInfo: nil, repeats: true)
         
         if !touchIDAvailable() || (loginSt.em == "" && loginSt.se == "") {
@@ -144,7 +184,7 @@ class LoginViewController: UIViewController, MFMailComposeViewControllerDelegate
         }
             
         else {
-//            self.authenticateUser()
+            //            self.authenticateUser()
             self.digitalButton.isHidden = false
         }
         
@@ -178,8 +218,8 @@ class LoginViewController: UIViewController, MFMailComposeViewControllerDelegate
         do {
             try managedObjectContext.execute(deleteRequest)
             try managedObjectContext.save()
-//            emailText.text = ""
-//            senhaText.text = ""
+            //            emailText.text = ""
+            //            senhaText.text = ""
         }
         catch let error {
             print(error.localizedDescription)
