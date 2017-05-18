@@ -38,19 +38,6 @@ GPIO.setup(15, GPIO.OUT)
 
 #Presença
 GPIO.setup(38, GPIO.IN)
-#GPIO.setup(38, GPIO.IN, pull_up_down=GPIO.PUD_UP)
-
-#Gas
-#GPIO.setup(37, GPIO.IN)
-#GPIO.setup(37, GPIO.IN, pull_up_down=GPIO.PUD_UP)
-
-#Fogo
-#GPIO.setup(40, GPIO.IN)
-#GPIO.setup(40, GPIO.IN, pull_up_down=GPIO.PUD_UP)
-
-#GPIO.setup(32, GPIO.OUT)
-#GPIO.setup(38, GPIO.OUT)
-#GPIO.setup(40, GPIO.OUT)
 
 #Firebase Database Intialization
 db = firebase.database()
@@ -179,11 +166,9 @@ while(True):
         #Check value of child(which is 'state')
         if(user.val() == "ON"):
             #If value is off, turn LED off
-            #GPIO.output(18, False)
             morsecode()
         else:
             #If value is not off(implies it's on), turn LED on
-            #GPIO.output(18, True)
             GPIO.output(18, GPIO.HIGH)    
 
     if GPIO.input(38) == 1:
@@ -193,8 +178,6 @@ while(True):
 
 
     gas_level = ReadChannel(gas_channel)
-#    gas_nvl = GasNvl(gas_level,2)    
-#    db.child("gas").set({"nivel": "{}".format(gas_level)})
     if gas_level < 300:
         db.child("gas").set({"nivel": "{}".format(gas_level), "state":"OFF"})
         time.sleep(.1)
@@ -203,8 +186,6 @@ while(True):
         time.sleep(.1)
     
     flame_level = 1023-ReadChannel(flame_channel)
-#    flame_nvl = FlameNvl(flame_level,2)
-#    db.child("fogo").set({"nivel":"{}".format(flame_level)})
     if flame_level < 300:
         db.child("fogo").set({"nivel": "{}".format(flame_level), "state":"OFF"})
         time.sleep(.1)
@@ -212,14 +193,6 @@ while(True):
         db.child("fogo").set({"nivel": "{}".format(flame_level), "state":"ON"})
         time.sleep(.1)
 
-#    if GPIO.input(37) == False:
-#        db.child("gas").set({"state": "ON"})
-#        print("Ó o GAS!")
-#        time.sleep(0.2)
-#    elif GPIO.input(37) == True:
-#        db.child("gas").set({"state": "OFF"})
-#        print("No Gás")
-#        time.sleep(0.2)
 
 
 #    if GPIO.input(40) == False:
