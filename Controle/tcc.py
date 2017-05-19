@@ -51,8 +51,6 @@ s.close
 os.system('sudo pkill uv4l')
 os.system('sudo uv4l -nopreview --auto-video_nr --driver raspicam --encoding mjpeg --width 640 --height 360 --framerate 120 --server-option \'--port=9090\' --server-option \'--max-queued-connections=30\' --server-option \'--max-streams=25\' --server-option \'--max-threads=29\'')
 
-#GPIO.output(18,GPIO.HIGH)
-
 def morsecode():
         #DOT
         GPIO.output(18,GPIO.HIGH)
@@ -117,8 +115,6 @@ while(True):
     hum, temp = Adafruit_DHT.read_retry(Adafruit_DHT.DHT22, 22)
     db.child("temperatura").set({"value": "{0:.1f}ºC".format(temp)})
     db.child("umidade").set({"value": "{0:.1f}%".format(hum)})
-   # print("{0:.f}ºC".format(temp))
-   # print("{0:.f}%".format(hum))
     #Get value of LED 
     ban = db.child("portas").child("banheiro").get()
     coz = db.child("portas").child("cozinha").get()
@@ -192,18 +188,3 @@ while(True):
     elif flame_level >= 300:
         db.child("fogo").set({"nivel": "{}".format(flame_level), "state":"ON"})
         time.sleep(.1)
-
-
-
-#    if GPIO.input(40) == False:
-#        db.child("fogo").set({"state": "ON"})
-#        print("Tá pegando fogo BIXO!")
-#        time.sleep(0.2)
-#    elif GPIO.input(40) == True:
-#        db.child("fogo").set({"state": "OFF"})
-#        print("No Fogo")
-#        time.sleep(0.2)
-
-    #0.1 Second Delay
-#    time.sleep(0.1)
-
