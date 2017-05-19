@@ -318,18 +318,6 @@ class WindowAla():
                         db.child("alarme").set({"state": "OFF"})
                         gp = "OFF"
                 
-                '''
-                for user in al.each():
-                                if user.val() == "OFF":
-                                        gp=1
-                                        morsecode()
-                                        db.child("alarme").set({"state": "ON"})
-                                else:
-                                        gp=0
-                                        GPIO.output(18,GPIO.HIGH)
-                                        db.child("alarme").set({"state": "OFF"})
-        '''
-                
         def finish(self):
 
                 self.master.destroy()
