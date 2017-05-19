@@ -118,34 +118,34 @@ class Welcome():
                 self.master = master
                 self.master.geometry("640x480")
                 self.master.title("IoT Security")
-                self.buttonCam = Button(self.master, text="Camera", font="Helvetica 30 bold", command=self.gotoWagesCam, height=4, width=10).grid(row=0, column=0)
-                self.buttonSens = Button(self.master, text="Sensores", font="Helvetica 30 bold", command=self.gotoWagesSens, height=4, width=11).grid(row=0, column=1)
-                self.buttonAla = Button(self.master, text="Alarme", font="Helvetica 30 bold", command=self.gotoWagesAla, height=4, width=10).grid(row=1, column=0)
-                self.buttonPor = Button(self.master, text="Portas", font="Helvetica 30 bold", command=self.gotoWagesPor, height=4, width=11).grid(row=1, column=1)
+                self.buttonCam = Button(self.master, text="Camera", font="Helvetica 30 bold", command=self.gotoWindowCam, height=4, width=10).grid(row=0, column=0)
+                self.buttonSens = Button(self.master, text="Sensores", font="Helvetica 30 bold", command=self.gotoWindowSens, height=4, width=11).grid(row=0, column=1)
+                self.buttonAla = Button(self.master, text="Alarme", font="Helvetica 30 bold", command=self.gotoWindowAla, height=4, width=10).grid(row=1, column=0)
+                self.buttonPor = Button(self.master, text="Portas", font="Helvetica 30 bold", command=self.gotoWindowPor, height=4, width=11).grid(row=1, column=1)
                 
-        def gotoWagesCam(self):
+        def gotoWindowCam(self):
             
                 os.system('sudo pkill uv4l')
                 camera.start_preview(fullscreen=False, window = (80, 80, 480,360))
                 root=Toplevel(self.master)
-                myGUI=WagesCam(root)
+                myGUI=WindowCam(root)
 
-        def gotoWagesSens(self):
-
-                root=Toplevel(self.master)
-                myGUI=WagesSens(root)
-
-        def gotoWagesAla(self):
+        def gotoWindowSens(self):
 
                 root=Toplevel(self.master)
-                myGUI=WagesAla(root)
+                myGUI=WindowSens(root)
 
-        def gotoWagesPor(self):
+        def gotoWindowAla(self):
 
                 root=Toplevel(self.master)
-                myGUI=WagesPor(root)
+                myGUI=WindowAla(root)
 
-class WagesCam():
+        def gotoWindowPor(self):
+
+                root=Toplevel(self.master)
+                myGUI=WindowPor(root)
+
+class WindowCam():
 
         def __init__(self, master):
 
@@ -160,7 +160,7 @@ class WagesCam():
                 self.master.destroy()
                 os.system('sudo uv4l -nopreview --auto-video_nr --driver raspicam --encoding mjpeg --width 640 --height 360 --framerate 120 --server-option \'--port=9090\' --server-option \'--max-queued-connections=30\' --server-option \'--max-streams=25\' --server-option \'--max-threads=29\'')
 
-class WagesSens():
+class WindowSens():
         
         def __init__(self, master):
                 
@@ -272,62 +272,15 @@ class WagesSens():
                         db.child('umidade').set({'value' : "{0:.1f}%".format(umid)})
                         tmTxt.set(j)
                         
-                        
-                        '''
-                        al = db.child("alarme").get()
-                        for user in al.each():
-                                if user.val() == "ON":
-                                        alTxt.set('ON')
-                                else:
-                                        alTxt.set('OFF')
-                                        
-                        fg = db.child("fogo").get()
-                        for user in fg.each():
-                                if user.val() == "ON":
-                                        fogTxt.set('ON')
-                                elif user.val() == "OFF":
-                                        fogTxt.set('OFF')
-                                else:
-                                        fogNvl.set(user.val())
-                                        
-                        ga = db.child("gas").get()
-                        for user in ga.each():
-                                if user.val() == "ON":
-                                        gasTxt.set('ON')
-                                elif user.val() == "OFF":
-                                        gasTxt.set('OFF')
-                                else:
-                                        gasNvl.set(user.val())
-
-                        ip = db.child("ip").get()
-                        for user in ip.each():
-                                ipTxt.set(user.val())
-
-                        pr = db.child("presenca").get()
-                        for user in pr.each():
-                                if user.val() == "ON":
-                                        preTxt.set('ON')
-                                else:
-                                        preTxt.set('OFF')
-
-                        temp = db.child("temperatura").get()
-                        for user in temp.each():
-                                temTxt.set(user.val())
-
-                        umid = db.child("umidade").get()
-                        for user in umid.each():
-                                umiTxt.set(user.val())
-                        '''
-                        #self.master.mainloop()
                         self.master.update_idletasks()
-                        #self.master.mainloop()
                         
         
                         
         def finish(self):
 
                         self.master.destroy()
-class WagesAla():
+                
+class WindowAla():
 
         
         
@@ -381,7 +334,7 @@ class WagesAla():
 
                 self.master.destroy()
 
-class WagesPor():
+class WindowPor():
 
         def __init__(self, master):
                         
@@ -454,39 +407,6 @@ class WagesPor():
                 m2.pack(side=BOTTOM)
 
                 
-                '''
-                for i in range(3600):
-                        time.sleep(1)
-                        ba = db.child("portas").child("banheiro").get()
-                        for user in ba.each():
-                                if user.val() == "ON":
-                                        banTxt.set('Banheiro: ON')
-                                else:
-                                        banTxt.set('Banheiro: OFF')
-                                        
-                        co = db.child("portas").child("cozinha").get()
-                        for user in co.each():
-                                if user.val() == "ON":
-                                        cozTxt.set('Cozinha: ON')
-                                else:
-                                        cozTxt.set('Cozinha: OFF')
-                                        
-                        qu = db.child("portas").child("quarto").get()
-                        for user in qu.each():
-                                if user.val() == "ON":
-                                        quaTxt.set('Quarto: ON')
-                                else:
-                                        quaTxt.set('Quarto: OFF')
-
-                        sa = db.child("portas").child("sala").get()
-                        for user in sa.each():
-                                if user.val() == "ON":
-                                        salTxt.set('Sala: ON')
-                                else:
-                                        salTxt.set('Sala: OFF')
-
-                        self.master.update_idletasks()
-                        '''
         def swBan(self):
                 if GPIO.input(11):
                         GPIO.output(11, GPIO.LOW)
@@ -494,15 +414,7 @@ class WagesPor():
                 else:
                         GPIO.output(11, GPIO.HIGH)
                         db.child("portas").child("banheiro").set({"state": "ON"})
-                '''
-                ba = db.child("portas").child("banheiro").get()
                 
-                for user in ba.each():
-                        if user.val() == "OFF":
-                                db.child("portas").child("banheiro").set({"state": "ON"})
-                        else:
-                                db.child("portas").child("banheiro").set({"state": "OFF"})
-        '''
         def swCoz(self):
                 if GPIO.input(12):
                         GPIO.output(12, GPIO.LOW)
@@ -510,15 +422,7 @@ class WagesPor():
                 else:
                         GPIO.output(12, GPIO.HIGH)
                         db.child("portas").child("cozinha").set({"state": "ON"})
-                '''
-                co = db.child("portas").child("cozinha").get()
                 
-                for user in co.each():
-                        if user.val() == "OFF":
-                                db.child("portas").child("cozinha").set({"state": "ON"})
-                        else:
-                                db.child("portas").child("cozinha").set({"state": "OFF"})
-        '''
         def swQua(self):
                 if GPIO.input(13):
                         GPIO.output(13, GPIO.LOW)
@@ -526,31 +430,14 @@ class WagesPor():
                 else:
                         GPIO.output(13, GPIO.HIGH)
                         db.child("portas").child("quarto").set({"state": "ON"})
-                '''
-                qu = db.child("portas").child("quarto").get()
                 
-                for user in qu.each():
-                        if user.val() == "OFF":
-                                db.child("portas").child("quarto").set({"state": "ON"})
-                        else:
-                                db.child("portas").child("quarto").set({"state": "OFF"})
-        '''
         def swSal(self):
                 if GPIO.input(16):
                         GPIO.output(16, GPIO.LOW)
                         db.child("portas").child("sala").set({"state": "OFF"})
                 else:
                         GPIO.output(16, GPIO.HIGH)
-                        db.child("portas").child("sala").set({"state": "ON"})
-                '''
-                sa = db.child("portas").child("sala").get()
-                
-                for user in sa.each():
-                        if user.val() == "OFF":
-                                db.child("portas").child("sala").set({"state": "ON"})
-                        else:
-                                db.child("portas").child("sala").set({"state": "OFF"})
-        '''                       
+                        db.child("portas").child("sala").set({"state": "ON"})             
 
         def finish(self):
 
